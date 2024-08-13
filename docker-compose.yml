@@ -1,0 +1,27 @@
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGODB_DATABASE="moovrun"
+    volumes:
+      - ./mongo:/data/db
+  # mysql:
+  #   image: mysql:5.7
+  #   container_name: mysql
+  #   ports:
+  #     - 3306:3306
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672" ## It is the port for the management plugin
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+    env_file:
+      - .env
